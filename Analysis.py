@@ -14,10 +14,22 @@ class analysis():
 	# clean up a row data 
 	def clean_up(self, file_name): 
 		with open(file_name) as infile:
+
+			'''
+			# replaceements 
+			rep = {'%20':' ','%2F%2F':'://','%2F':'/',';':'\n','%3D%3D%3D%3D':'\n','png':'\n','%3A':''}
+
+			rep = dict((re.escape(k),v) for k, v in rep.iteritems())
+			pattern = re.compile("|".join(rep.keys()))
+			text = pattern.sub(lambda m:rep[re.escape(m.group(0))], text)
+			print(text)
+			'''
+
 			contents = infile.read()
 			data = contents.replace('%20', ' ')
-			data = data.replace('%2F%2F','://')
-			info = data.replace(';','\n')
+			d_slash = data.replace('%2F%2F','://')
+			s_slash = d_slash.replace('%2F','/')
+			info = s_slash.replace(';','\n')
 			info = info.replace('%3D%3D%3D%3D','\n')
 			info = info.replace('png','\n')
 			info1 = info.replace('%3A','')
@@ -147,6 +159,15 @@ if __name__ == '__main__':
 #value =  test.prepare('Nata.txt', True)
 #print value 
 
+alexa = test.clean_up('./Test_results/alexa_data3.txt')
+
+alexa_dic = test.prepare(alexa)
+
+alexa_df = pd.DataFrame(data=alexa_dic)
+
+alexa_df.to_excel("parafortop100.xlsx")
+
+"""
 # import row file 
 usa = test.clean_up('./Test_results/test_result.txt')
 Italy = test.clean_up('./Test_results/Milan_Italy_test_result.txt')
@@ -164,12 +185,15 @@ Italy_v = test.prepare(Italy)
 # u'(Fully loaded) Time', u'DOM elements', u'First byte', u'Load time',
 # u'Speed Index', u'Start render', u'date'],
 ###############################################################################
+""" 
 '''
 df2 = pd.DataFrame.from_dict({(i,j):value[i][j]
 							for i in value.keys()
 							for j in value[i].keys()},
 							orient = 'index')
 '''
+
+"""
 df_u = pd.DataFrame(data=USA_v)
 df_i = pd.DataFrame(data=Italy_v)
 
@@ -212,4 +236,4 @@ plt.plot(y, '--')
 datacursor(hover=True, point_labels=predictions.index)
 plt.legend()
 plt.show()
-
+"""
