@@ -118,7 +118,7 @@ function check_status(){
 
 			//var data = JSON.stringify(q_data, null, 2)
 			// fs.writeFile('words2.json', q_data, response);
-			fs.appendFile('Test_results/alexa_data3.txt', q_data, response);
+			fs.appendFile('Test_results/alexa_data4.txt', q_data, response);
 			console.log(q_data)
 
 			function response(err){

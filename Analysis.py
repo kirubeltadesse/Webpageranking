@@ -165,7 +165,8 @@ alexa_dic = test.prepare(alexa)
 
 alexa_df = pd.DataFrame(data=alexa_dic)
 
-alexa_df.to_excel("parafortop100.xlsx")
+alexa_df.to_csv("parafortop100.csv")
+#alexa_df.to_excel("parafortop100.xlsx")
 
 """
 # import row file 
