@@ -104,7 +104,7 @@ def histogram_tab(webs):
         # Hover tool with vline mode
         hover = HoverTool(tooltips=[('Parameter','@name'),
                                    ('Website','@w_name'),
-                                    ('Proportion','p_proportion')
+                                    ('Proportion','@p_proportion')
                                    ],
                          mode='vline')
 

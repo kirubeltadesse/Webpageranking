@@ -51,7 +51,10 @@ def density_tab(webs):
 					x_axis_label = 'Distribution', y_axis_label = 'Density')
 		p.multi_line('x', 'y', color = 'color', legend = 'label',
 					line_width = 3, source = src)
-		hover = HoverTool(tooltips=[('parameter','@label'),],
+		hover = HoverTool(tooltips=[('parameter','@label'),
+									#('Distribution', '@src'),
+									#('Density', '@ys'),
+									],
 						  line_policy = 'next')
 
 		p.add_tools(hover)
