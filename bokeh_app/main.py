@@ -1,10 +1,11 @@
 # Pandas for data management
 import pandas as pd
-
 # os methods for manipulating paths
+# import os
+import os.path
 from os.path import dirname, join
 
-# Bokeh basics 
+# Bokeh basics
 from bokeh.io import curdoc
 from bokeh.models.widgets import Tabs
 
@@ -19,11 +20,16 @@ from scripts.density import density_tab
 # Using included state data from Bokeh for map
 from bokeh.sampledata.us_states import data as states
 
-path = '/home/kirubel/Networking/Webranking/bokeh_app/data'
+# print(os.path('__file__'))
+# path = '/c/Users/ktadesse/Desktop/Project/Webpageranking/bokeh_app/data'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+RESOURCE_DIR = os.path.join(BASE_DIR, 'data')
 
 # Read data into dataframes
-webs = pd.read_csv(join(dirname('__file__'), path, 'nor_time.csv'), 
-	                                          index_col=0).dropna()
+webs = pd.read_csv(os.path.join(RESOURCE_DIR, 'nor_time.csv'),
+                                index_col=0).dropna()
+# webs = pd.read_csv(join(dirname('__file__'), path, 'nor_time.csv'),
+	                                          # index_col=0).dropna()
 
 #webs = webs_paras.drop(['(Doc complete) Byets in','(Fully loaded) Bytes in',
 #						'(Fully loaded) Requests', '(Fully loaded) Requests',
@@ -46,5 +52,3 @@ tabs = Tabs(tabs = [tab1, tab2]) # tab4, tab5])
 
 # Put the tabs in the current document for display
 curdoc().add_root(tabs)
-
-
