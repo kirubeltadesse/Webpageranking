@@ -11,6 +11,8 @@ from bokeh.models.widgets import Tabs
 
 
 # Each tab is drawn by one script
+from scripts.welcome import welcome_tab
+# from scripts.barranking import barrank_tab
 from scripts.histogram import histogram_tab
 from scripts.density import density_tab
 #from scripts.table import table_tab
@@ -40,15 +42,23 @@ webs = pd.read_csv(os.path.join(RESOURCE_DIR, 'nor_time.csv'),
 ##map_data = pd.read_csv(join(dirname('__file__'), path, 'flights_map.csv'),
                            # header=[0,1], index_col=0)
 
+#? need to import the paramaters for the one website
+usrweb = webs.iloc[2]
+
+
 # Create each of the tabs
-tab1 = histogram_tab(webs)
-tab2 = density_tab(webs)
-#tab3 = table_tab(flights)
-#tab4 = map_tab(map_data, states)
-#tab5 = route_tab(flights)
+tab1 = welcome_tab()
+# tab2 = barrank_tab(webs, usrweb)
+tab3 = histogram_tab(webs)
+tab4 = density_tab(webs)
+
+#tab5 = table_tab(flights)
+
+#tab6 = map_tab(map_data, states)
+#tab7 = route_tab(flights)
 
 # Put all the tabs into one application
-tabs = Tabs(tabs = [tab1, tab2]) # tab4, tab5])
+tabs = Tabs(tabs = [tab1, tab3, tab4]) # tab4, tab5])
 
 # Put the tabs in the current document for display
 curdoc().add_root(tabs)
