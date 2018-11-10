@@ -12,7 +12,7 @@ from bokeh.models.widgets import Tabs
 
 # Each tab is drawn by one script
 from scripts.welcome import welcome_tab
-# from scripts.barranking import barrank_tab
+from scripts.barranking import barrank_tab
 from scripts.histogram import histogram_tab
 from scripts.density import density_tab
 #from scripts.table import table_tab
@@ -48,7 +48,7 @@ usrweb = webs.iloc[2]
 
 # Create each of the tabs
 tab1 = welcome_tab()
-# tab2 = barrank_tab(webs, usrweb)
+tab2 = barrank_tab(webs, usrweb)
 tab3 = histogram_tab(webs)
 tab4 = density_tab(webs)
 
@@ -58,7 +58,7 @@ tab4 = density_tab(webs)
 #tab7 = route_tab(flights)
 
 # Put all the tabs into one application
-tabs = Tabs(tabs = [tab1, tab3, tab4]) # tab4, tab5])
+tabs = Tabs(tabs = [tab1, tab2, tab3, tab4]) # tab4, tab5])
 
 # Put the tabs in the current document for display
 curdoc().add_root(tabs)
