@@ -10,9 +10,9 @@ urlpatterns = [
 
     # re_path('', views.showWebRequestView.as_view(), name="userinfo_list"),
     # re_path(r'^request_list', views.showWebRequestDetail.as_view(), name="userinfo_detail"),
-
+    path('process', views.usrweb_view, name='usrweb_view'),
+    path('',views.TestView.as_view(), name= "test"),
     # the name of the new
-    # path('forms', views.usrweb_view , name='usrweb_view'),
     # path('test', views.test_view, name='test_view'),
     # path('front', views.front_view, name='front_view'),
 ]

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     {% block head %}
-    <link rel="stylesheet" href="style.css" />
+    <!-- <link rel="stylesheet" href="style.css" /> -->
     <title>{% block title %}{% endblock %} Web User Test </title>
     {% endblock %}
 </head>
@@ -38,7 +38,7 @@
                 {{user_form.as_p}}
                 {{website_form.as_p}}
                 {% csrf_token %}
-              <input type="submit" name="btn bt-primery" value="Continue">
+              <input type="submit" name="btn bt-primery" onclick="location.href='{% url 'usrweb_view' %}'"  value="Continue">
             </form>
           </div>
         </div>
