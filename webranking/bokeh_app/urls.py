@@ -16,7 +16,7 @@ urlpatterns = [
     path('density',views.density_tab, name= "density"),
     path('table',views.table_tab, name= "table"),
     path('',views.TestView.as_view(), name= "test"),
-    # the name of the new
+    path('test', views.bokapp_page, name="test_view")
     # path('test', views.test_view, name='test_view'),
     # path('front', views.front_view, name='front_view'),
 ]

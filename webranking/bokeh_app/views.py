@@ -28,17 +28,17 @@ from scipy.stats import gaussian_kde
 
 from bokeh.plotting import figure, show
 from bokeh.models import (CategoricalColorMapper, HoverTool,
-						  ColumnDataSource, Panel,
-						  FuncTickFormatter, SingleIntervalTicker,LinearAxis)
+      ColumnDataSource, Panel,
+      FuncTickFormatter, SingleIntervalTicker,LinearAxis)
 from bokeh.models.widgets import (CheckboxGroup, Slider, RangeSlider,
-								  Tabs, CheckboxButtonGroup,
-								  TableColumn, DataTable, Select)
+      Tabs, CheckboxButtonGroup,
+      TableColumn, DataTable, Select)
 from bokeh.layouts import column, row, WidgetBox
 from bokeh.palettes import Category20_16
 
 #*************************** bokeh server imports ***********************************
 from bokeh.resources import CDN
-from bokeh.embed import components, file_html, server_session
+from bokeh.embed import components, file_html, server_session, server_document
 from bokeh.server.server import Server
 
 #
@@ -55,7 +55,7 @@ from Naked.toolshed.shell import execute_js, muterun_js
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 RESOURCE_DIR = os.path.join(BASE_DIR, 'data')
-
+print(BASE_DIR)
 # Read data into dataframes
 webs = pd.read_csv(os.path.join(RESOURCE_DIR, 'nor_time.csv'),
                                 index_col=0).dropna()
@@ -66,6 +66,7 @@ usrweb = webs.iloc[2]
 class TestView(TemplateView):
     template_name = 'bokeh_app/test.html'
 
+
 def usrweb_view(request):
     params = {}
     # taking the last website from the databased and calling the parameters
@@ -74,6 +75,8 @@ def usrweb_view(request):
     response = muterun_js('webtest_analysis.js', usrWebSite)
     # data = serializers.serialize("json", response)
     params['web_address'] = usrWebSite
+
+
     def prepare(data_in):
         content= data_in
         line = content.split('\n')
@@ -85,16 +88,30 @@ def usrweb_view(request):
             if len(values) == 2:
                 key, value = values
                 params[key] = value
+            elif len(values) == 1:
+                print("value is 1: ", values)
+            else:
+                print("in the else ",len(values), " ", values)
         return params
+
+    def renameParms(data):
+        mod_dic = {}
+        key = {'web_address':'', "load_time":'', "first_byte":'', "start_render":'', "speed_Index":'', "dom_elements":'', "doc_complete_Requests":'', "doc_complete_Byets":'',"fully_time":'', "fully_requests":'', "fully_bytes":''}
+        for parm, val in zip(key.keys(),data.values()):
+            # print(parm," ", val)
+            mod_dic[parm] = val
+
+        return mod_dic
 
     if response.exitcode == 0:
         print("SUCCEED")
-        print(response.stdout)
-        data = str((response.stdout).decode('utf8').replace("'",'"').replace('\n',' '))
+        # print(response.stdout)
+        data = str((response.stdout).decode('utf8').replace("'",'"'))
         start = data.find('Load time')
         end = data.find('Waterfall view')
         #passing the SELECTED (SLISED) result to a dictionary
-        data_dic = prepare(data[start:end])
+        print(prepare(data[start:end]))
+        data_dic = renameParms(prepare(data[start:end]))
         # passing the dictionary to the model
         ParaInfo.objects.create(**data_dic)
     else:
@@ -102,25 +119,6 @@ def usrweb_view(request):
         sys.stderr.write(str(response.stderr))
     # print(msg)
     return render(request, "bokeh_app/process.html")
-# import the function
-
-# def usrweb_view(request):
-#     form = forms.UserWeb()         #request.POST  # just enables "This field is required."
-#
-#     # Check to see if we get a POST back.
-#     if request.method == 'POST':
-#         form = forms.UserWeb(request.POST)
-#
-#         web_name = form.data['usrweb']
-#         print("reaching here")
-#         print(data)
-#
-#
-#             # call the funcition here and pass the parameters
-#
-#     # Pass request, name of the html file to hold the form and pass a dictionary {key:value}
-#     return render(request, 'bokeh_app/forms.html',{'form':form})
-
 # Create your views here.
 def index(request):
     registered = False
@@ -151,32 +149,18 @@ def index(request):
     return render(request, 'bokeh_app/index.html',{'user_form':user_form,
                                                     'website_form':website_form,
                                                     "registered":registered})
+def view_404(request):
+    return rediect('/')
 
-# def front_view(request):
-#     return render(request, 'front_end/front.html')
-# this request will be coming from contiue button on forms
-# def process_view(request):
-#     UserInfo.objects.all()
-#     # form = forms.UserWeb()        #request.POST  # just enables "This field is required."
-    #
-    # # Check to see if we get a POST back.
-    # if request.method == 'POST':
-    #     form = forms.UserWeb(data=request.POST)
-    #     form.save()
-    # #
-    #
-    #     web_name = form.data
-    #     print("reaching here")
-    #     print(web_name)
-# class showWebRequestView(ListView):
-#     model = UserInfo
-#     def get_queryset(self):
-#         return UserInfo.objects.filter(created_date__lte=timezone.now()).order_by('-created_date')
+def bokapp_page(request):
+    print("inside the function")
+    script = server_document('http:://localhost:5006/bkapp')
+    return render_to_response('bokeh_app/plot.html', {'script' : script } ) #, 'div' : div
 
-# class showWebRequestDetail(DetailView):
-#     model = UserInfo
 
 def barrank_tab(request):
+
+
 
     def make_dataset(params_list):
 
@@ -341,7 +325,8 @@ def barrank_tab(request):
     # Make a tab with the layout
     # tab = Panel(child = layout, title = 'Bar ranking')
     # return tab
-    script, div = components(layout)
+    script, div = components(layout, CDN)
+
     return render_to_response('bokeh_app/bar.html', {'script' : script , 'div' : div})
 
 def density_tab(request):
@@ -357,7 +342,6 @@ def table_tab(request):
 
 
 def test_view(request):
-
     # bokeh_server_url = "%sbokehproxy/sliders" % (request.build_absolute_uri(location='/'))
     # print( "This is what is being printed out", bokeh_server_url)
     x= [1,3,5,7,9,11,13]
@@ -373,29 +357,29 @@ def test_view(request):
     # some data to be plot
     plot.line(x, y, legend= 'f(x)', line_width = 2)
 
-    # server = Server(
-    #  # list of Bokeh applications
-    #  bokeh_applications,
-    #  # Tornado IOLoop
-    #  io_loop = loop,
-    #  # port, num_procs, etc.
-    #  **server_kwargs
-    # )
-    # server.start()
+    server = Server(
+     # list of Bokeh applications
+     bokeh_app,
+     # Tornado IOLoop
+     io_loop = loop,
+     # port, num_procs, etc.
+     **server_kwargs
+    )
+    server.start()
 
     #creat a session
-    # session  = push_session(curdoc())
+    session  = push_session(curdoc())
 
 
-    # context = {'script': autoload_server(f, session_id=session.id)}
+    context = {'script': autoload_server(f, session_id=session.id)}
     # additonal argument to the autoload_server can be passed
     #                          app_path="/selection_histogram",
     # context = {'script': autoload_server(model=None)#, url="http://localhost:5006/")
 
-    # return render_to_response('plot.html', context=context)
+    return render_to_response('plot.html', context=context)
 
     #Store components
-    script, div = components(plot)
+    # script, div = components(plot)
     # html = file_html(plot, CDN, "MY PLOT")
     # print(html)
 
@@ -403,5 +387,5 @@ def test_view(request):
     # return render(request, html)
     # return HttpResponse("yest it works")
 
-    return render_to_response('bokeh_app/plot.html', {'script' : script , 'div' : div})
+    # return render_to_response('bokeh_app/plot.html', {'script' : script , 'div' : div})
     # return render_to_response(show(plot))

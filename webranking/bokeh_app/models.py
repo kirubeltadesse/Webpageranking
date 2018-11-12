@@ -10,8 +10,6 @@ class UserInfo(models.Model):
     first_name = models.CharField(max_length=256)
     last_name = models.CharField(max_length=256)
     email = models.EmailField(max_length=256)
-
-
     # def create(self):
     #     self.created_date = timezone.now()
     #     self.save()
