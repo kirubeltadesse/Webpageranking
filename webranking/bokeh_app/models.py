@@ -11,6 +11,11 @@ class UserInfo(models.Model):
     last_name = models.CharField(max_length=256)
     email = models.EmailField(max_length=256)
 
+
+    # def create(self):
+    #     self.created_date = timezone.now()
+    #     self.save()
+
     # adding information about the user that is not included in the model
     # BASICALLY OneToOneField means that
     # user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True,)
@@ -19,7 +24,8 @@ class UserInfo(models.Model):
     #additional
     # block=True means that user doesn't need to provide their info
 class WebInfo(models.Model):
-    website = models.URLField(max_length=256, primary_key=True)
+    website = models.URLField(max_length=256, primary_key=True) #, primary_key=True)
+    created_date = models.DateTimeField(auto_now_add=True,null=True)
     userinfo = models.ForeignKey(UserInfo, null=True, related_name='websites', on_delete=models.PROTECT)
     # created_date = models.ForeignKey(default=datetime.datetime.now(), on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL) #, primary_key=True,
     # created_date = models.DateTimeField(blank=True, null=True)

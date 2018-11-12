@@ -56,6 +56,8 @@ def index(request):
 
             user = user_form.save()
             user.save()
+            # adding the created_date
+            # UserInfo.create(self)
 
             website = website_form.save() #(commit=False)
             website.user = user
