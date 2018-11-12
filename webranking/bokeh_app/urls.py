@@ -11,6 +11,10 @@ urlpatterns = [
     # re_path('', views.showWebRequestView.as_view(), name="userinfo_list"),
     # re_path(r'^request_list', views.showWebRequestDetail.as_view(), name="userinfo_detail"),
     path('process', views.usrweb_view, name='usrweb_view'),
+    path('barranking',views.barrank_tab, name= "barrank"),
+    path('histogram',views.histogram_tab, name= "histogram"),
+    path('density',views.density_tab, name= "density"),
+    path('table',views.table_tab, name= "table"),
     path('',views.TestView.as_view(), name= "test"),
     # the name of the new
     # path('test', views.test_view, name='test_view'),
