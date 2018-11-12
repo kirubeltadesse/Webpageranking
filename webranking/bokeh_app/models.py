@@ -39,5 +39,5 @@ class WebInfo(models.Model):
     #     return reverse('index', kwargs={'pk':self.pk})
     # return the represention of the model object
     # returning the website name instated of the username
-    def __str__(self):
+    def __str__(self)
         return self.website
