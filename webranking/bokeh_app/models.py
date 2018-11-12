@@ -41,3 +41,24 @@ class WebInfo(models.Model):
     # returning the website name instated of the username
     def __str__(self):
         return self.website
+
+class ParaInfo(models.Model):
+    web_address = models.URLField(max_length=256)
+    load_time = models.CharField(max_length=50)
+    first_byte = models.CharField(max_length=50)
+    start_render = models.CharField(max_length=50)
+    speed_Index = models.CharField(max_length=50)
+    dom_elements = models.CharField(max_length=50)
+
+    doc_complete_Requests = models.CharField(max_length=50)
+    doc_complete_Byets = models.CharField(max_length=50)
+
+    fully_time = models.CharField(max_length=50)
+    fully_requests = models.CharField(max_length=50)
+    fully_bytes = models.CharField(max_length=50)
+    webinfo = models.ForeignKey(WebInfo, null=True, related_name='websites', on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.web_address
+
+        # Waterfall view= result.data.runs[1].firstView.images.waterfall)

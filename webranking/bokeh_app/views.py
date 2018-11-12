@@ -2,7 +2,7 @@ from django.shortcuts import render
 from bokeh_app.forms import UserForm
 from bokeh_app.forms import WebForm
 #just to see the models
-from bokeh_app.models import WebInfo
+from bokeh_app.models import WebInfo, ParaInfo
 # from django.core import serializers
 # view types
 from django.utils import timezone
@@ -31,14 +31,36 @@ class TestView(TemplateView):
     template_name = 'bokeh_app/test.html'
 
 def usrweb_view(request):
+    params = {}
     # taking the last website from the databased and calling the parameters
+    print("in usrweb_view")
     usrWebSite = WebInfo.objects.values('website').order_by('-created_date')[0]['website']
     response = muterun_js('webtest_analysis.js', usrWebSite)
     # data = serializers.serialize("json", response)
-    print("SUCCEED")
+    params['web_address'] = usrWebSite
+    def prepare(data_in):
+        content= data_in
+        line = content.split('\n')
+
+        for each in line:
+            values=each.split(':')
+
+            # lenght should be two
+            if len(values) == 2:
+                key, value = values
+                params[key] = value
+        return params
+
     if response.exitcode == 0:
         print("SUCCEED")
         print(response.stdout)
+        data = str((response.stdout).decode('utf8').replace("'",'"').replace('\n',' '))
+        start = data.find('Load time')
+        end = data.find('Waterfall view')
+        #passing the SELECTED (SLISED) result to a dictionary
+        data_dic = prepare(data[start:end])
+        # passing the dictionary to the model
+        ParaInfo.objects.create(**data_dic)
     else:
         print("FAILED")
         sys.stderr.write(str(response.stderr))
