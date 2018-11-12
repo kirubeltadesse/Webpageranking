@@ -2,12 +2,11 @@ from django.shortcuts import render
 from bokeh_app.forms import UserForm
 from bokeh_app.forms import WebForm
 #just to see the models
-from bokeh_app.models import UserInfo
-
+from bokeh_app.models import WebInfo
+# from django.core import serializers
 # view types
 from django.utils import timezone
-from django.views.generic import ListView, DetailView
-
+from django.views.generic import ListView, DetailView, TemplateView
 
 # Create your views here.
 import logging
@@ -23,6 +22,28 @@ from bokeh.server.server import Server
 #
 from bokeh.io import curdoc
 from bokeh.client import push_session
+
+# connecting with the JavaScript file
+import sys
+from Naked.toolshed.shell import execute_js, muterun_js
+
+class TestView(TemplateView):
+    template_name = 'bokeh_app/test.html'
+
+def usrweb_view(request):
+    # taking the last website from the databased and calling the parameters
+    usrWebSite = WebInfo.objects.values('website').order_by('-created_date')[0]['website']
+    response = muterun_js('webtest_analysis.js', usrWebSite)
+    # data = serializers.serialize("json", response)
+    print("SUCCEED")
+    if response.exitcode == 0:
+        print("SUCCEED")
+        print(response.stdout)
+    else:
+        print("FAILED")
+        sys.stderr.write(str(response.stderr))
+    # print(msg)
+    return render(request, "bokeh_app/process.html")
 # import the function
 
 # def usrweb_view(request):
@@ -41,7 +62,6 @@ from bokeh.client import push_session
 #
 #     # Pass request, name of the html file to hold the form and pass a dictionary {key:value}
 #     return render(request, 'bokeh_app/forms.html',{'form':form})
-
 
 # Create your views here.
 def index(request):
@@ -76,6 +96,9 @@ def index(request):
                                                     'website_form':website_form,
                                                     "registered":registered})
     # return HttpResponse("Hello THere")
+
+
+
 
 # def front_view(request):
 #     return render(request, 'front_end/front.html')
