@@ -82,9 +82,10 @@ def barrank_tab(webs, usrweb):
                 x_axis_label = 'Parameters', y_axis_label = 'Percentage')
 
         p.vbar(x=dodge('params',-0.15,range=p.x_range),
-                        top = 'Standard', width=0.65, source=src, color = "#41b6c4", alpha=0.8,muted_color="#41b6c4", muted_alpha=0.2, legend=value("Standard"))
+                        top = 'Standard', width=0.65, source=src, color = "#41b6c4", muted_color="#41b6c4", muted_alpha=0.2, fill_alpha = 0.7, hover_fill_color = 'navy',  hover_fill_alpha = 1.0, legend=value("Standard"))
         p.vbar(x=dodge('params',0.15,range=p.x_range),
                         top = 'input', width=0.6, source=src, color = "#084594", alpha=0.8,muted_color="#084594", muted_alpha=0.2,legend=value("input site"))
+
         p.legend.click_policy="mute"
 
         hover = HoverTool(tooltips=[('Percentage','@src'),
