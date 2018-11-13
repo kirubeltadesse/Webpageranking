@@ -98,7 +98,7 @@ def histogram_tab(webs):
                   x_axis_label = 'parameters', y_axis_label = "values")
 
         # Quad glyphs to create a histogram
-        p.quad(source=src, bottom =0,left = 'left', right = 'right', color ='color', top= 'proportion',fill_alpha = 0.7, hover_fill_color = 'color', legend = 'name',
+        p.quad(source=src, bottom =0,left = 'left', right = 'right', color ='color', top= 'proportion',fill_alpha = 0.7, hover_fill_color = 'navy', legend = 'name',
                hover_fill_alpha = 1.0, line_color = 'color') #top='proportion',
 
         # Hover tool with vline mode
@@ -127,7 +127,7 @@ def histogram_tab(webs):
                       bin_width = binwidth_select.value)
 
         # Convert dataframe to column data source
-        new_src = ColumnDataSource(new_src)
+        #new_src = ColumnDataSource(new_src)
 
         # Update the source used the quad glpyhs
         src.data.update(new_src.data)
@@ -137,6 +137,7 @@ def histogram_tab(webs):
     
     para_selection = CheckboxGroup(labels=list_of_params, active = [0,1])
     para_selection.on_change('active',update)
+    
     
     binwidth_select = Slider(start =0, end = 1,
                             step = 0.00025, value = 0.0005,
