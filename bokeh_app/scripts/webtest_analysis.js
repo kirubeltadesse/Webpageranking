@@ -19,9 +19,8 @@ function processweb_add() {
 			pollResults: 5,
 			video: true
 		}, function processTeststatus(err, result) {
-			console.log(err || result)
+			// console.log(err || result)
 		//		console.log('Data id: ', result.data.id)
-
 			//collecting all the test_ids
 			data_id.push(result.data.id)
 
@@ -31,7 +30,6 @@ function processweb_add() {
 		})
    // }
 }
-
 function check_status(){
 	// console.log(data_id.length)
 	for(var i=0; i < data_id.length; i++){
