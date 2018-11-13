@@ -19,17 +19,17 @@ from bokeh.palettes import Category20_16
 def histogram_tab(webs):
 
     def make_dataset(params_list, range_start = 0.0, range_end = 1, bin_width = 0.005):
-        
+
         #check to make sure the start is less than the end
         assert range_start < range_end, "Start must be less than end!"
 
         #by_params = pd.DataFrame(columns=[ ,'Max', 'Avarage', 'Min','color'])
-        by_params = pd.DataFrame(columns=[ 'left','right', 'proportion', 'p_proportion','p_interval', 'name', 'w_name','color']) 
-            # 
+        by_params = pd.DataFrame(columns=[ 'left','right', 'proportion', 'p_proportion','p_interval', 'name', 'w_name','color'])
+            #
 
         range_extent = range_end - range_start
         values = ['Min', "Avarage", 'Max']
-        # Iterate through all the parameters 
+        # Iterate through all the parameters
         for i, para_name in enumerate(params_list):
 
             #print para_name
@@ -41,7 +41,7 @@ def histogram_tab(webs):
             # [webs.columns[i%6]]
 
             # Create a histogram with specified bins and range
-            arr_hist, edges = np.histogram(subset,  
+            arr_hist, edges = np.histogram(subset,
                                           bins = int(range_extent / bin_width),
                                           range = [range_start, range_end])
 
@@ -53,7 +53,7 @@ def histogram_tab(webs):
             arr_df['p_proportion'] = ['%0.00005f' % proportion for proportion in arr_df['proportion']]
 
             # Format the interval
-            arr_df['p_interval'] = ['%d to %d scale' % (left, right) for left, 
+            arr_df['p_interval'] = ['%d to %d scale' % (left, right) for left,
                                    right in zip(arr_df['left'], arr_df['right'])]
 
             # Assign the parameter for labels
@@ -68,7 +68,7 @@ def histogram_tab(webs):
 
         # Overall dataframe
         by_params = by_params.sort_values(['name','left'])
-    
+
         return ColumnDataSource(by_params)
 
 
@@ -112,14 +112,14 @@ def histogram_tab(webs):
         # Stypling
         p = style(p)
         return p
-     
+
     # Update function takes three default parameters
     def update(attr, old, new):
 
         # Get the list of parameter for the graph
         parameter_to_plot = [para_selection.labels[i] for i in para_selection.active]
 
-        # Make a new dataset based on the selected parameter and the 
+        # Make a new dataset based on the selected parameter and the
         # make_dataset function defined earlier
         new_src = make_dataset(parameter_to_plot,
 								range_start = range_select.value[0],
@@ -134,43 +134,43 @@ def histogram_tab(webs):
 
     list_of_params = list(webs.columns[1:].unique())
     list_of_params.sort()
-    
+
     para_selection = CheckboxGroup(labels=list_of_params, active = [0,1])
     para_selection.on_change('active',update)
-    
-    
+
+
     binwidth_select = Slider(start =0, end = 1,
                             step = 0.00025, value = 0.0005,
                             title = 'Change in parameter')
     binwidth_select.on_change('value', update)
-    
+
     range_select = RangeSlider(start=0, end=1, value =(0,1),
                              step=0.00025, title = 'Change in range')
     range_select.on_change('value', update)
-    
+
     initial_params = [para_selection.labels[i] for i in para_selection.active]
-    
+
     src = make_dataset(initial_params,
                       range_start = range_select.value[0],
                       range_end = range_select.value[1],
                       bin_width = binwidth_select.value)
-    
-    
+
+
     p = make_plot(src)
     #show(p)
     # Put controls in a single element
     controls = WidgetBox(para_selection, binwidth_select, range_select)
-    
+
     # Create a row layout
     layout = row(controls, p)
-    
+
     # Make a tab with the layout
     tab = Panel(child = layout, title = 'Histogram')
     return tab
     #tabs = Tabs(tabs=[tab])
-    
+
     #doc.add_root(tabs)
-    
+
 # Set up an application
 #handler = FunctionHandler(modify_doc)
 #app = Application(handler)
@@ -178,6 +178,3 @@ def histogram_tab(webs):
 
 #modify_doc(webs)
 #show(app, 'localhost:9000')
-
-
-

@@ -79,15 +79,15 @@ def barrank_tab(webs, usrweb):
 
         p = figure(x_range=list_of_params, plot_height=450, toolbar_location="right",
                 title="Comparison of the Performance of Websites",
-                x_axis_label = 'parameters', y_axis_label = 'Percentage')
+                x_axis_label = 'Parameters', y_axis_label = 'Percentage')
 
         p.vbar(x=dodge('params',-0.15,range=p.x_range),
                         top = 'Standard', width=0.65, source=src, color = "#41b6c4", alpha=0.8,muted_color="#41b6c4", muted_alpha=0.2, legend=value("Standard"))
         p.vbar(x=dodge('params',0.15,range=p.x_range),
-                        top = 'input', width=0.5, source=src, color = "#084594", alpha=0.8,muted_color="#084594", muted_alpha=0.2,legend=value("input site"))
+                        top = 'input', width=0.6, source=src, color = "#084594", alpha=0.8,muted_color="#084594", muted_alpha=0.2,legend=value("input site"))
         p.legend.click_policy="mute"
 
-        hover = HoverTool(tooltips=[('Percentage','@y_axis_label'),
+        hover = HoverTool(tooltips=[('Percentage','@src'),
                             #('Distribution', '@src'),
                                 #('Density', '@ys'),
                                     ],
