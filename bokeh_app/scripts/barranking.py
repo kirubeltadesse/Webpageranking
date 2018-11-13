@@ -24,7 +24,7 @@ def barrank_tab(webs, usrweb):
         # Iterate through all the parameters
         for i, para_name in enumerate(params_list):
 
-            
+
             subset = webs[para_name].mean()
             avg.append(subset)
 
@@ -61,13 +61,13 @@ def barrank_tab(webs, usrweb):
         p.legend.location = "top_center"
 
         return p
-    
+
     def update(attr, old, new):
         # Get the list of carriers for the graph
-        para_to_plot = [para_selection.labels[i] for i in 
+        para_to_plot = [para_selection.labels[i] for i in
                             para_selection.active]
 
-        # Make a new dataset based on the selected carriers and the 
+        # Make a new dataset based on the selected carriers and the
         # make_dataset function defined earlier
         new_src = make_dataset(para_to_plot)
 
@@ -76,15 +76,24 @@ def barrank_tab(webs, usrweb):
 
 
     def make_plot(src):
-        
-        p = figure(x_range=list_of_params, plot_height=450, toolbar_location=None,
-                title="Comparison of the Performance of Websites")
+
+        p = figure(x_range=list_of_params, plot_height=450, toolbar_location="right",
+                title="Comparison of the Performance of Websites",
+                x_axis_label = 'parameters', y_axis_label = 'Percentage')
 
         p.vbar(x=dodge('params',-0.15,range=p.x_range),
                         top = 'Standard', width=0.65, source=src, color = "#41b6c4", alpha=0.8,muted_color="#41b6c4", muted_alpha=0.2, legend=value("Standard"))
         p.vbar(x=dodge('params',0.15,range=p.x_range),
                         top = 'input', width=0.5, source=src, color = "#084594", alpha=0.8,muted_color="#084594", muted_alpha=0.2,legend=value("input site"))
         p.legend.click_policy="mute"
+
+        hover = HoverTool(tooltips=[('Percentage','@y_axis_label'),
+                            #('Distribution', '@src'),
+                                #('Density', '@ys'),
+                                    ],
+                                    line_policy = 'next')
+
+        p.add_tools(hover)
 
         p = style(p)
 
@@ -96,30 +105,29 @@ def barrank_tab(webs, usrweb):
     src = make_dataset(list_of_params)
     para_selection = CheckboxGroup(labels=list_of_params, active = [0, 1])
     para_selection.on_change('active', update)
-    
-#     binwidth_select = Slider(start = 0, end = 1, 
+
+#     binwidth_select = Slider(start = 0, end = 1,
 #                          step = 0.00025, value = 0.0005,
 #                          title = 'Delay Width (min)')
 #     binwidth_select.on_change('value', update)
-    
+
 #     range_select = RangeSlider(start = 0, end = 1, value = (0,1),
 #                                step = 0.00025, title = 'Delay Range (min)')
 #     range_select.on_change('value', update)
-    
-    
-    
+
+
+
     initial_params = [para_selection.labels[i] for i in para_selection.active]
-    
+
     src = make_dataset(initial_params)
     p = make_plot(src)
-    
+
      # Put controls in a single element
     controls = WidgetBox(para_selection)
-    
+
     # Create a row layout
     layout = row(controls, p)
 
     # Make a tab with the layout
     tab = Panel(child = layout, title = 'Bar ranking')
     return tab
-   
