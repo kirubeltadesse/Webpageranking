@@ -1,0 +1,15 @@
+{% extends "bokeh_app/index.html" %}
+{% block title %}Form {% endblock %}
+
+{% block content %}
+
+  {% for req in userinfo_list %}
+    <p>in the for loop</p>
+    <h1><a href="#"></a>{{req.website}}</h1>
+
+      <p>request on: {{ req.created_date|date:"D-M-Y" }}</p>
+
+  {%endfor%}
+  {{ userinfo_list.created_date }}
+
+{% endblock %}
