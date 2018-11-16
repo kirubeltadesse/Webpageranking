@@ -58,7 +58,9 @@ def histogram_tab(webs):
 
             # Assign the parameter for labels
             arr_df['name'] = para_name
-            #arr_df['w_name'] = webs['Site name']
+
+			# Assign the website name
+            arr_df['w_name'] = webs['Site name']
 
             # Color each parametr differently
             arr_df['color'] = Category20_16[i]
@@ -102,8 +104,8 @@ def histogram_tab(webs):
                hover_fill_alpha = 1.0, line_color = 'color') #top='proportion',
 
         # Hover tool with vline mode
-        hover = HoverTool(tooltips=[('Parameter','@name'),
-                                   ('Website','@w_name'),
+        hover = HoverTool(tooltips=[('Website','@w_name'),
+									('Parameter','@name'),
                                     ('Proportion','@p_proportion')
                                    ],
                          mode='vline')

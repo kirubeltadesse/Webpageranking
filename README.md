@@ -25,5 +25,5 @@ The packages required to run the django server are:
 
 <!-- for table creating  -->
 <!-- python manage.py migrate --run-syncdb -->
-
+<!-- the normalized data is missing web name column -->
 [Here](https://github.com/KonoAnalytics/BokehDjango/blob/master/bokehdash/views.py) is the tutorial link that I am using 
