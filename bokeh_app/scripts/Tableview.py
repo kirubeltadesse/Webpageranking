@@ -24,11 +24,11 @@ def table_tab(webs):
         # Iterate through all the parameters
         for i, para_name in enumerate(params_list):
 
-            
+
             subset = webs[para_name].mean()
             avg.append(subset)
 
-        
+
 
         data = {'params' : params_list,
             'Standard'   : avg,
@@ -41,23 +41,22 @@ def table_tab(webs):
         TableColumn(field="params", title="Performance Parameter"),
         TableColumn(field="Standard", title="Average Performance") ]
         data_table = DataTable(source=src, columns=columns, width=500, height=380)
-        
+
         return data_table
 
     list_of_params = list(webs.columns[1:].unique())
     list_of_params.sort()
 
     src = make_dataset(list_of_params)
-    
+
     p = make_plot(src)
-    
+
      # Put controls in a single element
     controls = WidgetBox(p)
-    
+
     # Create a row layout
     layout = row(controls)
 
     # Make a tab with the layout
-    tab = Panel(child = layout, title = 'Table view')
+    tab = Panel(child = layout, title = 'Detail')
     return tab
-   

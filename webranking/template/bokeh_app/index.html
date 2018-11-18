@@ -26,6 +26,7 @@
             </div>
           </div>
         </nav>
+        {% block body %}
         <h1>Welcome to user web interaction ! </h1>
         <br>
         <!-- The form -->
@@ -49,6 +50,7 @@
           {{ script| safe }}
 
         </div>
+        {% endblock %}
     {% endblock %}
   </div>
 
