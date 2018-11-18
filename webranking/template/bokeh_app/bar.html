@@ -1,24 +1,10 @@
 {% extends "bokeh_app/index.html" %}
 {% block title %} Bokeh Figure {% endblock %}
-
-{% block head %}
-<!-- Bohek import cnds note the version must much-->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bokeh/1.0.0/bokeh.css" type="text/css" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bokeh/1.0.0/bokeh-widgets.css" rel="stylesheet" type="text/css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bokeh/1.0.0/bokeh.min.css" rel="stylesheet" type="text/css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bokeh/1.0.0/bokeh-widgets.min.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bokeh/1.0.0/bokeh.min.css" type="text/css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bokeh/1.0.0/bokeh-widgets.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bokeh/1.0.0/bokeh-widgets.min.js"></script>
-{% endblock %}
-
-
-
-{% block content %}
+{% block body %}
 <div class="container">
-  {{ div | safe }}
+  <h3>{{ graphname}} </h3>
 
- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bokeh/1.0.0/bokeh.js"></script>
- {{ script | safe }}
+  {{server_script|safe}}
+
 </div>
 {% endblock %}

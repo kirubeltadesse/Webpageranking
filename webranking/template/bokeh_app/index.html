@@ -13,7 +13,7 @@
     {% block content %}
       <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#">Test UI</a>
+          <a class="navbar-brand" href="{% url 'index' %}">Test UI</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -26,6 +26,7 @@
             </div>
           </div>
         </nav>
+        {% block body %}
         <h1>Welcome to user web interaction ! </h1>
         <br>
         <!-- The form -->
@@ -49,6 +50,7 @@
           {{ script| safe }}
 
         </div>
+        {% endblock %}
     {% endblock %}
   </div>
 

@@ -53,4 +53,3 @@ tabs = Tabs(tabs = [tab1, tab2, tab3, tab4, tab5]) # tab4, tab5])
 
 # Put the tabs in the current document for display
 curdoc().add_root(tabs)
-

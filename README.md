@@ -7,23 +7,29 @@ The visualization is done using Bokeh in the ```bokeh_app``` folder. The folder 
 
 ## Required package
 The packages required to run the django server are:
-### Visualiztion packages
--  bokeh 1.0.0
--  cufflinks 0.14.4
--  tornado 5.1.7
-### Python
--  python 3.6.7
--  pandas 0.23.4
--  numpy 1.15.3
--  Naked
--  PScript
-### nodeJS
--  nodejs
--  npm
-### Django
-- psycopg2 2.7.5
+#### Visualization packages
+All the package used in this project are specified in the `spec-file.txt`. If you are using `conda` on windows machine you can directory
+```
+$ conda create --name <env> --file spec-file.txt
+```
+expect `Naked` use
+```
+$ pip install Naked
+```
+those should create an environment with the necessary dependencies to run the application.
 
-<!-- for table creating  -->
+<!-- to table creating  -->
 <!-- python manage.py migrate --run-syncdb -->
+
 <!-- the normalized data is missing web name column -->
-[Here](https://github.com/KonoAnalytics/BokehDjango/blob/master/bokehdash/views.py) is the tutorial link that I am using 
+
+<!-- ### Comments on Beta release
+- Allow the sure to have a side by side view. (https://hub.mybinder.org/user/bokeh-bokeh-notebooks-1zde6jyk/notebooks/tutorial/11%20-%20Running%20Bokeh%20Applictions.ipynb#Directory-Format-Apps-and-Templates)
+(https://github.com/bokeh/bokeh/blob/master/examples/app/dash/main.py)
+- Give meaningful naming conventions
+- Keep consistence across different views  
+- While selecting and de-selecting the parameters the x-axis must adjust
+- Table view (should be called Detail) has to include all the parameters and their actual values
+
+https://groups.google.com/a/continuum.io/d/msg/bokeh/7T61s6gQyW4/SzHXHSKmAQAJ
+ -->

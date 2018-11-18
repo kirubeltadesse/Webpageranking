@@ -58,5 +58,6 @@ def table_tab(webs):
     layout = row(controls)
 
     # Make a tab with the layout
-    tab = Panel(child = layout, title = 'Table View')
+    tab = Panel(child = layout, title = 'Detail')
+
     return tab
