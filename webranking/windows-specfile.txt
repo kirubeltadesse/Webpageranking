@@ -32,6 +32,7 @@ https://repo.anaconda.com/pkgs/main/win-64/chardet-3.0.4-py36_1.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/colorama-0.4.0-py36_0.tar.bz2
 https://conda.anaconda.org/dhirschfeld/win-64/colorlover-0.2.1.post014+gd63b098-py36_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/decorator-4.3.0-py36_0.tar.bz2
+https://conda.anaconda.org/conda-forge/noarch/djangorestframework-3.9.0-py_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/entrypoints-0.2.3-py36_2.tar.bz2
 https://repo.anaconda.com/pkgs/free/noarch/futures-compat-1.0-py3_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/idna-2.7-py36_0.tar.bz2
@@ -46,9 +47,11 @@ https://repo.anaconda.com/pkgs/main/win-64/mistune-0.8.4-py36he774522_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/numpy-base-1.15.3-py36h8128ebf_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/olefile-0.46-py36_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/pandocfilters-1.4.2-py36_1.tar.bz2
+https://conda.anaconda.org/ioam/noarch/param-1.6.1-py_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/parso-0.3.1-py36_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/pickleshare-0.7.5-py36_0.tar.bz2
 https://conda.anaconda.org/anaconda/win-64/prometheus_client-0.4.2-py36_0.tar.bz2
+https://conda.anaconda.org/conda-forge/noarch/pscript-0.7.0-py_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/pycparser-2.19-py36_0.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/pyparsing-2.2.2-py_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/pytz-2018.5-py36_0.tar.bz2
@@ -57,6 +60,7 @@ https://conda.anaconda.org/anaconda/win-64/send2trash-1.5.0-py36_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/simplegeneric-0.8.1-py36_2.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/sip-4.18.1-py36h6538335_2.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/six-1.11.0-py36_1.tar.bz2
+https://conda.anaconda.org/conda-forge/noarch/sqlparse-0.2.4-py_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/testpath-0.4.2-py36_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/tornado-5.1.1-py36hfa6e2cd_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/wcwidth-0.1.7-py36h3d5aa90_0.tar.bz2
@@ -82,7 +86,9 @@ https://repo.anaconda.com/pkgs/main/win-64/setuptools-40.4.3-py36_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/traitlets-4.3.2-py36h096827d_0.tar.bz2
 https://conda.anaconda.org/dhirschfeld/win-64/bleach-2.0.0-py36_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/cryptography-2.3.1-py36h74b6da3_0.tar.bz2
+https://conda.anaconda.org/conda-forge/label/gcc7/noarch/django-debug-toolbar-1.9.1-py_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/jinja2-2.10-py36_0.tar.bz2
+https://conda.anaconda.org/conda-forge/label/gcc7/noarch/jsonfield-2.0.2-py_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/jsonschema-2.6.0-py36h7636477_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/jupyter_core-4.4.0-py36_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/pillow-5.3.0-py36hdc69c19_0.tar.bz2
@@ -107,6 +113,7 @@ https://repo.anaconda.com/pkgs/main/win-64/plotly-3.3.0-py36h28b3542_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/widgetsnbextension-3.4.2-py36_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/ipywidgets-7.4.2-py36_0.tar.bz2
 https://conda.anaconda.org/bokeh/label/dev/noarch/bokeh-1.0.0rc4-py_0.tar.bz2
+https://conda.anaconda.org/ioam/label/dev/noarch/parambokeh-0.2.2-py_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/matplotlib-2.2.2-py36had4c4a9_2.tar.bz2
 https://conda.anaconda.org/conda-forge/label/gcc7/noarch/mpld3-0.3-py_1.tar.bz2
 https://repo.anaconda.com/pkgs/main/win-64/mkl_fft-1.0.6-py36hdbbee80_0.tar.bz2
