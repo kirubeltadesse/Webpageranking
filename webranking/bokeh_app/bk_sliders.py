@@ -31,7 +31,9 @@ from scipy.stats import gaussian_kde
 #output_notebook()
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 RESOURCE_DIR = os.path.join(BASE_DIR, 'data', 'nor_time.csv')
+
 
 # Read data into dataframes
 webs = pd.read_csv(RESOURCE_DIR, index_col=0).dropna()

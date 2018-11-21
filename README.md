@@ -8,7 +8,7 @@ The visualization is done using Bokeh in the ```bokeh_app``` folder. The folder 
 ## Required package
 The packages required to run the django server are:
 #### Visualization packages
-All the package used in this project are specified in the `spec-file.txt`. If you are using `conda` on windows machine you can directory
+All the package used in this project are specified in the `windows-specfile.txt`. If you are using `conda` on windows machine you can directory
 ```
 $ conda create --name <env> --file spec-file.txt
 ```

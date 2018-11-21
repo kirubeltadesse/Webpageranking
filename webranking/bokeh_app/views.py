@@ -151,3 +151,6 @@ def table_tab(request):
     return render(request, 'bokeh_app/table.html', {
     "server_script": server_document('http://%s:%s/bk_sliders_tab'%(bk_config.server['address'],
                                                                     bk_config.server['port']))})
+
+# def sidebyside(request):
+#     return render(request, 'bokeh_app/sidebyside.html')

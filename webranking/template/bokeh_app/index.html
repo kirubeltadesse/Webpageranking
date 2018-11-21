@@ -19,10 +19,12 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-item nav-link active" href="{% url 'barrank' %}">Bar ranking <span class="sr-only">(current)</span></a>
+              <!-- active and disabled  -->
+              <a class="nav-item nav-link" href="{% url 'barrank' %}">Bar ranking <span class="sr-only">(current)</span></a>
               <a class="nav-item nav-link" href="{% url 'histogram' %}">Histogram</a>
               <a class="nav-item nav-link" href="{% url 'density' %}">Density Plot</a>
-              <a class="nav-item nav-link disabled" href="{% url 'table' %}">Table Details</a>
+              <a class="nav-item nav-link" href="{% url 'table' %}">Table Details</a>
+            
             </div>
           </div>
         </nav>
