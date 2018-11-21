@@ -6,7 +6,9 @@ The visualization is done using Bokeh in the ```bokeh_app``` folder. The folder 
 [![Dashboard using Bokeh](https://img.youtube.com/vi/qSHbC7QEQdI/0.jpg)](https://www.youtube.com/watch?time_continue=1&v=qSHbC7QEQdI)
 
 ## Required package
+
 The packages required to run the django server and every application on this project are specified in the `windows-specfile.txt` or `linux-specfile.txt`. If you have conda installed in you machine either windows or linux, after cloning the repo you can run conda with the respective specfile. like this for windows:
+
 ```
 $ conda create --name <env> --file windows-specfile.txt
 ```
@@ -18,7 +20,7 @@ those should create an environment with the necessary dependencies to run the ap
 ```
 activate <env>
 ```
-And cd to `webranking` and there should be a `manage.py` file 
+And cd to `webranking` and there should be a `manage.py` file
 ```
 python manage.py makemigrations
 ```
