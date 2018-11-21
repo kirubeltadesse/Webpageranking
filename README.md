@@ -6,17 +6,34 @@ The visualization is done using Bokeh in the ```bokeh_app``` folder. The folder 
 [![Dashboard using Bokeh](https://img.youtube.com/vi/qSHbC7QEQdI/0.jpg)](https://www.youtube.com/watch?time_continue=1&v=qSHbC7QEQdI)
 
 ## Required package
-The packages required to run the django server are:
-#### Visualization packages
-All the package used in this project are specified in the `windows-specfile.txt`. If you are using `conda` on windows machine you can directory
+The packages required to run the django server and every application on this project are specified in the `windows-specfile.txt` or `linux-specfile.txt`. If you have conda installed in you machine either windows or linux, after cloning the repo you can run conda with the respective specfile. like this for windows:
 ```
-$ conda create --name <env> --file spec-file.txt
+$ conda create --name <env> --file windows-specfile.txt
 ```
 expect `Naked` use
 ```
 $ pip install Naked
 ```
-those should create an environment with the necessary dependencies to run the application.
+those should create an environment with the necessary dependencies to run the application. Then, activate your conda env by
+```
+activate <env>
+```
+And cd to `webranking` and there should be a `manage.py` file 
+```
+python manage.py makemigrations
+```
+and
+```
+python manage.py migrate
+```
+and finally just to make sure
+```
+python manage.py migrate --run-syncdb
+```
+Now, you can lauch you localhost by running
+```
+python manage.py runserver
+```
 
 <!-- to table creating  -->
 <!-- python manage.py migrate --run-syncdb -->
