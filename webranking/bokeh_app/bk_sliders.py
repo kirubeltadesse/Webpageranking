@@ -32,12 +32,9 @@ from scipy.stats import gaussian_kde
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-<<<<<<< Updated upstream
 RESOURCE_DIR = os.path.join(BASE_DIR, 'data', 'nor_time.csv')
 
-=======
-RESOURCE_DIR = os.path.join(r'D:\Project\Webpageranking\bokeh_app\data\nor_time.csv')
->>>>>>> Stashed changes
+
 
 # Read data into dataframes
 webs = pd.read_csv(RESOURCE_DIR, index_col=0).dropna()
