@@ -6,17 +6,13 @@ import os
 os.environ["BOKEH_SECRET_KEY"] = "wQGYgPXx6M5ITqI3hBFZOG7GACXlUBFsWZ6J9pAfZX8X"
 os.environ["BOKEH_SIGN_SESSIONS"] = "True"
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# TEMPLATES_DIR = os.path.join(BASE_DIR,"template")
+
+TEMPLATES_DIR = os.path.join(os.path.split(BASE_DIR)[0],'template')
 STATIC_DIR = os.path.join(BASE_DIR,'static')
 
-
-# TEMPLATES_DIR = 'webranking/bokeh_app/template'
-# print(os.path.dirname(os.path.abspath(__file__))-"sitting")
-# print("This is the base addrese :", BASE_DIR)
-# print("This is the Templates addrese :", TEMPLATES_DIR)
-# Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -25,7 +21,6 @@ SECRET_KEY = '_9ujpl0961y(4v0hlo5hv3+-eokfty8pd&euxb!8hv82s9@$lm'
 # need to be add
 # ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS','localhost').split(',')
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -56,7 +51,7 @@ ROOT_URLCONF = 'webranking.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [r'D:\Project\Webpageranking\webranking\template'],
+        'DIRS': [TEMPLATES_DIR,],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
