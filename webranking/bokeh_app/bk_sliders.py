@@ -1,16 +1,10 @@
-# cut down version of https://github.com/bokeh/bokeh/blob/master/examples/app/sliders.py
-
 from bokeh.layouts import row
 from bokeh.models import ColumnDataSource
 from bokeh.plotting import figure
 import pandas as pd
 import numpy as np
 
-import os.path
-from os.path import dirname, join
-
 from bokeh.plotting import figure
-
 from bokeh.models import CategoricalColorMapper, HoverTool, ColumnDataSource, Panel
 from bokeh.models.widgets import (CheckboxGroup, Slider, RangeSlider, CheckboxButtonGroup,
 								  TableColumn, DataTable, Select)
@@ -24,35 +18,29 @@ from bokeh.core.properties import value
 
 # for density plot
 from scipy.stats import gaussian_kde
-
-# from bokeh.application.handlers import FunctionHandler
-# from bokeh.application import Application
-
-#output_notebook()
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-RESOURCE_DIR = os.path.join(BASE_DIR, 'data', 'nor_time.csv')
+from . import process_input
 
 
+Instant = process_input.helper(2)
+#, index_col=0).dropna()
 
-# Read data into dataframes
-webs = pd.read_csv(RESOURCE_DIR, index_col=0).dropna()
-webs= pd.DataFrame(data=webs)
-# webs = pd.read_csv(join(dirname('__file__'), path, 'nor_time.csv'),
-											  # index_col=0).dropna()
+#getting the csv file
+file = pd.read_csv(Instant.get_data(file='alexasite.csv')).dropna()
 
-#webs = webs_paras.drop(['(Doc complete) Byets in','(Fully loaded) Bytes in',
-#						'(Fully loaded) Requests', '(Fully loaded) Requests',
-#						'(Doc complete) Requests'], axis = 1)
-#webs_requests = webs_paras[['Site name','(Fully loaded) Requests',
-#							'(Fully loaded) Requests','(Doc complete) Requests']]
-## Formatted Flight Delay Data for map
-##map_data = pd.read_csv(join(dirname('__file__'), path, 'flights_map.csv'),
-						   # header=[0,1], index_col=0)
+# picking up the six Column
+time = Instant.catagory(file,'time')
 
-#? need to import the paramaters for the one website
-usrweb = webs.iloc[2]
+# normalizing the 6 Columns
+webs_nor = Instant.normal(time, name='running_normalization').reset_index()
+
+webs= pd.DataFrame(data=webs_nor)
+
+
+usrInputDf = Instant.get_data()
+
+# changing the input to pandas serias
+usrweb = usrInputDf.iloc[0]
+
 
 def histogram_tab(doc):
 
@@ -70,7 +58,6 @@ def histogram_tab(doc):
 		# Iterate through all the parameters
 		for i, para_name in enumerate(params_list):
 
-			#print para_name
 			# Subset to the parameter
 			subset = webs[para_name]
 
@@ -96,7 +83,8 @@ def histogram_tab(doc):
 
 			# Assign the parameter for labels
 			arr_df['name'] = para_name
-			#arr_df['w_name'] = webs['Site name']
+
+			arr_df['w_name'] = webs['Site name']
 
 			# Color each parametr differently
 			arr_df['color'] = Category20_16[i]
@@ -170,7 +158,7 @@ def histogram_tab(doc):
 		# Update the source used the quad glpyhs
 		src.data.update(new_src.data)
 
-	list_of_params = list(webs.columns[1:].unique())
+	list_of_params = list(webs.columns.get_level_values(0).drop_duplicates())[1:]
 	list_of_params.sort()
 
 	para_selection = CheckboxGroup(labels=list_of_params, active = [0,1])
@@ -226,7 +214,8 @@ def barrank_tab(doc):
 			'Standard'   : avg,
 			'input'   : parms,
 		}
-		return ColumnDataSource(data=data)
+
+		return ColumnDataSource(data=dict(data))
 
 
 	def style(p):
@@ -278,7 +267,13 @@ def barrank_tab(doc):
 		p.vbar(x=dodge('params',0.15,range=p.x_range),
 						top = 'input', width=0.5, source=src, color = "#084594", muted_color="#084594",
 						muted_alpha=0.2,fill_alpha = 0.7, hover_fill_color = 'navy',  hover_fill_alpha = 1.0, legend=value("input site"))
-						
+
+		# hover = HoverTool(tooltips=[('Parameter','@name'),
+		# 						   # ('Website','@w_name'),
+		# 							# ('Proportion','@p_proportion')
+		# 						   ],
+		# 				 mode='vline')
+
 		p.legend.click_policy="mute"
 
 		hover = HoverTool(tooltips=[('Percentage','@y_axis_label'),
@@ -293,8 +288,8 @@ def barrank_tab(doc):
 
 		return p
 
-	list_of_params = list(webs.columns[1:].unique())
-	list_of_params.sort()
+	list_of_params = list(webs.columns.get_level_values(0).drop_duplicates())[1:] #.unique())
+	# list_of_params.sort()
 
 	src = make_dataset(list_of_params)
 	para_selection = CheckboxGroup(labels=list_of_params, active = [0, 1])
@@ -308,9 +303,6 @@ def barrank_tab(doc):
 #     range_select = RangeSlider(start = 0, end = 1, value = (0,1),
 #                                step = 0.00025, title = 'Delay Range (min)')
 #     range_select.on_change('value', update)
-
-
-
 	initial_params = [para_selection.labels[i] for i in para_selection.active]
 
 	src = make_dataset(initial_params)
@@ -333,10 +325,17 @@ def density_tab(doc):
 		labels = []
 
 		for i, param in enumerate(param_list):
-			subset = webs[param].between(range_start,range_end)
+			subset = webs[param].drop(labels=[8]).transpose().iloc[0]
+
+			# subset = subset.between(range_start,range_end)
+
+			# subset= webs[(webs[param] >= range_start) and (webs[para] <= range_end)]
+
+			# subset = webs[param].between(range_start,range_end)
+
 			#subset = subset[subset[param].between(range_start,range_end)]
 
-			kde = gaussian_kde(webs[param], bw_method=bandwidth)
+			kde = gaussian_kde(subset, bw_method=bandwidth)
 
 			# Evenly space x values
 			x = np.linspace(range_start, range_end, 100)
@@ -406,7 +405,7 @@ def density_tab(doc):
 		return p
 
 	# Parameter and colors
-	available_parameters = list(set(webs.columns[1:]))
+	available_parameters = list(webs.columns.get_level_values(0).drop_duplicates())[1:]
 	available_parameters.sort()
 
 	para_colors = Category20_16
@@ -449,6 +448,7 @@ def density_tab(doc):
 	doc.title = "Density"
 	doc.add_root(layout)
 
+
 def table_tab(doc):
 
 	def make_dataset(params_list):
@@ -461,7 +461,7 @@ def table_tab(doc):
 		for i, para_name in enumerate(params_list):
 
 
-			subset = webs[para_name].mean()
+			subset = usrInputDf[para_name] #.mean()
 			avg.append(subset)
 
 
@@ -480,7 +480,7 @@ def table_tab(doc):
 
 		return data_table
 
-	list_of_params = list(webs.columns[1:].unique())
+	list_of_params = list(usrInputDf.columns.unique())
 	list_of_params.sort()
 
 	src = make_dataset(list_of_params)
