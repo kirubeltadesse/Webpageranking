@@ -35,10 +35,10 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 RESOURCE_DIR = os.path.join(BASE_DIR, 'data', 'nor_time.csv')
 
 
-
 # Read data into dataframes
 webs = pd.read_csv(RESOURCE_DIR, index_col=0).dropna()
 webs= pd.DataFrame(data=webs)
+print(webs)
 # webs = pd.read_csv(join(dirname('__file__'), path, 'nor_time.csv'),
 											  # index_col=0).dropna()
 
@@ -337,6 +337,7 @@ def density_tab(doc):
 		labels = []
 
 		for i, param in enumerate(param_list):
+			print(webs[param])
 			subset = webs[param].between(range_start,range_end)
 			#subset = subset[subset[param].between(range_start,range_end)]
 
