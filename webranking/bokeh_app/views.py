@@ -1,63 +1,63 @@
-#**************** view import *************************************************
+from django.contrib import messages
 from django.shortcuts import render, redirect
-from bokeh_app.forms import UserForm
 from bokeh_app.forms import WebForm
 #just to see the models
 from bokeh_app.models import WebInfo, ParaInfo
+from bokeh_app.process_input import helper
 # from django.core import serializers
 # view types
 from django.utils import timezone
-from django.views.generic import ListView, DetailView, TemplateView
+# from django.views.generic import ListView, DetailView, TemplateView
 
-# Create your views here.
-import logging
 from django.shortcuts import render, render_to_response
-from django.http import HttpResponse
-from bokeh.embed import server_document
+from django.http import HttpResponseRedirect
 
+#********************************* bokeh server imports ************************
+from bokeh.embed import server_document
 from . import bk_config
 
-#***************************** connecting with the JavaScript file ********************
+#***************************** connecting with the JavaScript file *************
 import sys
 from Naked.toolshed.shell import execute_js, muterun_js
 
-#***************************** rest_framework ****************************************
+#***************************** rest_framework **********************************
 from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
-from bokeh_app.serializers import UserSerializer, GroupSerializer
-from rest_framework.renderers import JSONRenderer
+# from rest_framework import viewsets
+# from bokeh_app.serializers import UserSerializer, GroupSerializer
+# from rest_framework.renderers import JSONRenderer
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
-    # return JSONRenderer(serializer_class)
+# class UserViewSet(viewsets.ModelViewSet):
+#     """
+#     API endpoint that allows users to be viewed or edited.
+#     """
+#     queryset = User.objects.all().order_by('-date_joined')
+#     serializer_class = UserSerializer
+#     # return JSONRenderer(serializer_class)
+#
+# class GroupViewSet(viewsets.ModelViewSet):
+#     """
+#     API endpoint that allows groups to be viewed or edited.
+#     """
+#     queryset = Group.objects.all()
+#     serializer_class = GroupSerializer
+#
+# class TestView(TemplateView):
+#     template_name = 'bokeh_app/test.html'
 
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-
-
-class TestView(TemplateView):
-    template_name = 'bokeh_app/test.html'
-
-
+# def process(request):
+#     channel(bokeh_app-process).send()
+#     return render(request, "bokeh_app/process.html")
 
 def usrweb_view(request):
+    print("in usrweb_view")
+    # HttpResponseRedirect("bokeh_app/plot.html")
     params = {}
     # taking the last website from the databased and calling the parameters
-    print("in usrweb_view")
     usrWebSite = WebInfo.objects.values('website').order_by('-created_date')[0]['website']
     response = muterun_js('webtest_analysis.js', usrWebSite)
     # data = serializers.serialize("json", response)
     params['web_address'] = usrWebSite
-
 
     def prepare(data_in):
         content= data_in
@@ -96,40 +96,36 @@ def usrweb_view(request):
         data_dic = renameParms(prepare(data[start:end]))
         # passing the dictionary to the model
         ParaInfo.objects.create(**data_dic)
+        # dic_para = ParaInfo.objects.values().filter(web_address= WebInfo.objects.values('website').order_by('-created_date')[0]['website'])[0]
+        helper(2).write_model_toCSV(data_dic)
+        # write_model_toCSV(data_dic)
+
     else:
         print("FAILED")
         sys.stderr.write(str(response.stderr))
     # print(msg)
     return render(request, "bokeh_app/process.html")
+
 # Create your views here.
 def index(request):
     registered = False
     if request.method == "POST":
-        user_form = UserForm(data=request.POST)
         website_form = WebForm(data=request.POST)
-
-        if user_form.is_valid() and website_form.is_valid():
-
-            user = user_form.save()
-            user.save()
-            # adding the created_date
-            # UserInfo.create(self)
-
-            website = website_form.save() #(commit=False)
-            website.user = user
-
-            website.save()
+        if website_form.is_valid():
+            websiteInput = website_form.save() #(commit=False)
+            websiteInput.save()
 
             registered = True
+            # messages.success(request,'Form submission successful')
         else:
-            print(user_form.errors, website_form.errors)
+            print(website_form.errors)
+        # messages.add_message(request, messages.INFO, "please wait patiently as we collect the parameters for the website!")
     else:
-        user_form = UserForm()
+        # user_form = UserForm()
         website_form = WebForm()
 
     #Feed them to the Django template.
-    return render(request, 'bokeh_app/index.html',{'user_form':user_form,
-                                                    'website_form':website_form,
+    return render(request, 'bokeh_app/index.html',{'website_form':website_form,
                                                     "registered":registered})
 
 def barrank_tab(request):

@@ -6,25 +6,14 @@ from django.utils import timezone
 from django.conf import settings
 import django.db.models.deletion
 
-class UserInfo(models.Model):
+
+class WebInfo(models.Model):
     first_name = models.CharField(max_length=256)
     last_name = models.CharField(max_length=256)
     email = models.EmailField(max_length=256)
-    # def create(self):
-    #     self.created_date = timezone.now()
-    #     self.save()
-
-    # adding information about the user that is not included in the model
-    # BASICALLY OneToOneField means that
-    # user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True,)
-    def __str__(self):
-        return self.last_name
-    #additional
-    # block=True means that user doesn't need to provide their info
-class WebInfo(models.Model):
     website = models.URLField(max_length=256, primary_key=True) #, primary_key=True)
     created_date = models.DateTimeField(auto_now_add=True,null=True)
-    userinfo = models.ForeignKey(UserInfo, null=True, related_name='websites', on_delete=models.PROTECT)
+    # userinfo = models.ForeignKey(UserInfo, null=True, related_name='websites', on_delete=models.PROTECT)
     # created_date = models.ForeignKey(default=datetime.datetime.now(), on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL) #, primary_key=True,
     # created_date = models.DateTimeField(blank=True, null=True)
 
@@ -41,6 +30,7 @@ class WebInfo(models.Model):
         return self.website
 
 class ParaInfo(models.Model):
+    # created_date = models.DateTimeField(auto_now_add=True,null=True)
     web_address = models.URLField(max_length=256)
     load_time = models.CharField(max_length=50)
     first_byte = models.CharField(max_length=50)
@@ -54,7 +44,7 @@ class ParaInfo(models.Model):
     fully_time = models.CharField(max_length=50)
     fully_requests = models.CharField(max_length=50)
     fully_bytes = models.CharField(max_length=50)
-    webinfo = models.ForeignKey(WebInfo, null=True, related_name='websites', on_delete=models.PROTECT)
+    webinfo = models.ForeignKey(WebInfo, null=True, related_name='websites', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.web_address
