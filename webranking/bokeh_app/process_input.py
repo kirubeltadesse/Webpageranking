@@ -140,7 +140,7 @@ class helper:
             df_ret = df[['(Fully loaded) Requests','(Doc complete) Requests']]
         elif(cata == 'bytes'):
             df_ret = df[['(Doc complete) Byets in','(Fully loaded) Bytes in']]
-    
+
         return df_ret
 
 
@@ -180,13 +180,9 @@ if __name__ == '__main__':
 # import from a the cleaned data
 #value =  test.prepare('Nata.txt', True)
 
-
 # alexa = test.clean_up('./Test_results/alexa_data3.txt')
-
 # alexa_dic = test.prepare(alexa)
-
 # alexa_df = pd.DataFrame(data=alexa_dic)
-
 # data = pd.read_csv("D://Project//Webpageranking/bokeh_app/data/alexasite.csv")
 #
 # df =catagory(data, 'time')

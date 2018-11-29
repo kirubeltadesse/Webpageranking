@@ -5,7 +5,6 @@ import pandas as pd
 import numpy as np
 
 from bokeh.plotting import figure
-
 from bokeh.models import CategoricalColorMapper, HoverTool, ColumnDataSource, Panel
 from bokeh.models.widgets import (CheckboxGroup, Slider, RangeSlider, CheckboxButtonGroup,
 								  TableColumn, DataTable, Select)
