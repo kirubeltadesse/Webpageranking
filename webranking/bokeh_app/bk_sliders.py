@@ -278,11 +278,7 @@ def barrank_tab(doc):
 		p.vbar(x=dodge('params',0.15,range=p.x_range),
 						top = 'input', width=0.5, source=src, color = "#084594", muted_color="#084594",
 						muted_alpha=0.2,fill_alpha = 0.7, hover_fill_color = 'navy',  hover_fill_alpha = 1.0, legend=value("input site"))
-		hover = HoverTool(tooltips=[('Parameter','@name'),
-								   ('Website','@w_name'),
-									('Proportion','@p_proportion')
-								   ],
-						 mode='vline')
+						
 		p.legend.click_policy="mute"
 
 		hover = HoverTool(tooltips=[('Percentage','@y_axis_label'),
