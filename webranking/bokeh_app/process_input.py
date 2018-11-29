@@ -148,7 +148,6 @@ class helper:
 
         min_max_scaler = preprocessing.MinMaxScaler()
 
-
         if(isinstance(nor_to, pd.DataFrame)):
             # reordering the columne of the input
             new_order = new_order = [1,8,7,11,10,9,6,3,2,5,4,]
