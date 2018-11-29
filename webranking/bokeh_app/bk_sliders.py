@@ -36,13 +36,12 @@ webs_nor = Instant.normal(time, name='running_normalization').reset_index()
 
 webs= pd.DataFrame(data=webs_nor)
 
-# print(webs.index.values)
+
 usrInputDf = Instant.get_data()
-# print(webs)
+
 # changing the input to pandas serias
 usrweb = usrInputDf.iloc[0]
 
-# print(type(usrweb),"this is the type")
 
 def histogram_tab(doc):
 
@@ -60,7 +59,6 @@ def histogram_tab(doc):
 		# Iterate through all the parameters
 		for i, para_name in enumerate(params_list):
 
-			#print para_name
 			# Subset to the parameter
 			subset = webs[para_name]
 
@@ -326,18 +324,17 @@ def density_tab(doc):
 		labels = []
 
 		for i, param in enumerate(param_list):
-			web = webs[param].iloc[0]
+			subset = webs[param].drop(labels=[8]).transpose().iloc[0]
 
-			subset = web[param].between(range_start,range_end)
+			# subset = subset.between(range_start,range_end)
 
-			# print(webs[param])
 			# subset= webs[(webs[param] >= range_start) and (webs[para] <= range_end)]
 
 			# subset = webs[param].between(range_start,range_end)
 
 			#subset = subset[subset[param].between(range_start,range_end)]
 
-			kde = gaussian_kde(web[param], bw_method=bandwidth)
+			kde = gaussian_kde(subset, bw_method=bandwidth)
 
 			# Evenly space x values
 			x = np.linspace(range_start, range_end, 100)
