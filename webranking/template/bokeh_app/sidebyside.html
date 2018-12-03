@@ -1,29 +1,46 @@
 {% extends "bokeh_app/index.html" %}
 {% block head %}
-<link rel="stylesheet" href="style.css" />
+
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
 
 {% endblock %}
 {% block title %} Bokeh Figure {% endblock %}
 {% block body %}
 
-  <div class="container">
+
+<link rel="stylesheet" href="style.css" />
+
+<div id="div1">
+  {{server_script|safe}}
+</div>
+<div id="div2">
+  {{den_script|safe}}
+</div>
+<div id="div3">
+  {{his_script|safe}}
+</div>
+<div id="div4">
+  {{rank_script|safe}}
+</div>
+
+
+  <!-- <div class="container">
     <div class="row">
-      <div class="col-">
+      <div class="col-sm">
       {{server_script|safe}}
       </div>
-      <div class="col-">
+      <div class="col-sm">
       {{den_script|safe}}
       </div>
     </div>
     <div class="row">
-      <div class="col-">
+      <div class="col-sm">
       {{his_script|safe}}
       </div>
-      <div class="col-">
+      <div class="col-sm">
       {{rank_script|safe}}
       </div>
     </div>
-  </div>
+  </div> -->
 
 {% endblock %}
