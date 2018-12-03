@@ -19,5 +19,5 @@ urlpatterns = [
     path('histogram',views.histogram_tab, name= "histogram"),
     path('density',views.density_tab, name= "density"),
     path('table',views.table_tab, name= "table"),
-    # path('sidebyside', views.sidebyside, name="sidebyside")
+    path('sidebyside', views.sidebyside, name="sidebyside"),
 ]

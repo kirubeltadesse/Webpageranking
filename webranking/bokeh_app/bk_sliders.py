@@ -1,6 +1,3 @@
-from bokeh.layouts import row
-from bokeh.models import ColumnDataSource
-from bokeh.plotting import figure
 import pandas as pd
 import numpy as np
 
@@ -60,6 +57,8 @@ def histogram_tab(doc):
 
 			# Subset to the parameter
 			subset = webs[para_name]
+			params = usrweb[para_name]
+
 
 			# note: subset have to be a list of values
 
@@ -126,6 +125,9 @@ def histogram_tab(doc):
 		# Quad glyphs to create a histogram
 		p.quad(source=src, bottom =0,left = 'left', right = 'right', color ='color', top= 'proportion',fill_alpha = 0.7, hover_fill_color = 'navy', legend = 'name',
 			   hover_fill_alpha = 1.0, line_color = 'color') #top='proportion',
+
+		# adding user value to the view
+		# p.circle(x, y, fill_color="white", size=8)
 
 		# Hover tool with vline mode
 		hover = HoverTool(tooltips=[('Parameter','@name'),
@@ -291,7 +293,7 @@ def barrank_tab(doc):
 	list_of_params = list(webs.columns.get_level_values(0).drop_duplicates())[1:] #.unique())
 	# list_of_params.sort()
 
-	src = make_dataset(list_of_params)
+	# src = make_dataset(list_of_params)
 	para_selection = CheckboxGroup(labels=list_of_params, active = [0, 1])
 	para_selection.on_change('active', update)
 
@@ -310,7 +312,6 @@ def barrank_tab(doc):
 
 	 # Put controls in a single element
 	controls = WidgetBox(para_selection)
-
 	layout = row(controls, p)
 	doc.add_root(layout)
 	doc.title = "Bar ranking"

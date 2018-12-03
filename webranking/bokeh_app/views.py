@@ -22,32 +22,8 @@ from Naked.toolshed.shell import execute_js, muterun_js
 
 #***************************** rest_framework **********************************
 from django.contrib.auth.models import User, Group
-# from rest_framework import viewsets
-# from bokeh_app.serializers import UserSerializer, GroupSerializer
-# from rest_framework.renderers import JSONRenderer
 
 
-# class UserViewSet(viewsets.ModelViewSet):
-#     """
-#     API endpoint that allows users to be viewed or edited.
-#     """
-#     queryset = User.objects.all().order_by('-date_joined')
-#     serializer_class = UserSerializer
-#     # return JSONRenderer(serializer_class)
-#
-# class GroupViewSet(viewsets.ModelViewSet):
-#     """
-#     API endpoint that allows groups to be viewed or edited.
-#     """
-#     queryset = Group.objects.all()
-#     serializer_class = GroupSerializer
-#
-# class TestView(TemplateView):
-#     template_name = 'bokeh_app/test.html'
-
-# def process(request):
-#     channel(bokeh_app-process).send()
-#     return render(request, "bokeh_app/process.html")
 
 def usrweb_view(request):
     print("in usrweb_view")
@@ -148,5 +124,15 @@ def table_tab(request):
     "server_script": server_document('http://%s:%s/bk_sliders_tab'%(bk_config.server['address'],
                                                                     bk_config.server['port']))})
 
-# def sidebyside(request):
-#     return render(request, 'bokeh_app/sidebyside.html')
+
+def sidebyside(request):
+    return render(request, 'bokeh_app/sidebyside.html',{
+    "server_script": server_document('http://%s:%s/bk_sliders_tab'%(bk_config.server['address'],
+                                                                    bk_config.server['port'])),
+    "den_script": server_document('http://%s:%s/bk_sliders_den'%(bk_config.server['address'],
+                                                                    bk_config.server['port'])),
+    "his_script": server_document('http://%s:%s/bk_sliders_hist'%(bk_config.server['address'],
+                                                                   bk_config.server['port'])),
+    "rank_script": server_document('http://%s:%s/bk_sliders_bar'%(bk_config.server['address'],
+                                                                    bk_config.server['port'])),
+                                                                })

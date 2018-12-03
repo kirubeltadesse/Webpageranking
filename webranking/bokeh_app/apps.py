@@ -16,7 +16,7 @@ def on_shutdown():
 def bk_worker():
     # Note: num_procs must be 1
     server = Server({'/bk_sliders_hist':bk_sliders.histogram_tab,'/bk_sliders_bar':bk_sliders.barrank_tab,
-    '/bk_sliders_den':bk_sliders.density_tab,'/bk_sliders_tab':bk_sliders.table_tab},
+    '/bk_sliders_den':bk_sliders.density_tab,'/bk_sliders_tab':bk_sliders.table_tab,},
                     io_loop=IOLoop(),
                     address=bk_config.server['address'],
                     port=bk_config.server['port'],
