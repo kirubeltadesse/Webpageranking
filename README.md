@@ -50,6 +50,17 @@ Now, you can lauch you localhost by running
 python manage.py runserver
 ```
 
+### Results 
+- The test was performed several time both on the same list of servers. And the difference in those paramater in different time is the same. In other words, the difference is negligible.
+
+OLS stands for Ordinary Least Squares and the method “Least Squares” means that we’re trying to fit a regression line that would minimize the square of distance from the regression line
+
+Using this model for the **First Byte:** being Y, p1 =**Speed Index**, p2 = **Load time**, p3 = **Start render**, p4 = **DOM elements**
+the coefficent for each parameters will be as follows:
+```
+Y = -0.7179*p1 + 0.5839*p2 +0.7944*p3 +-1.3634*p4
+```
+
 <!-- to table creating  -->
 <!-- python manage.py migrate --run-syncdb -->
 
