@@ -1,9 +1,12 @@
 # Webpageranking
-This repository include visualization and analysis for ranking website.
+This repository include visualization and analysis for ranking website. The visualization tools are aimed to give a ranking based on the user interaction with a given the website.
 
 ## Visualization
 The visualization is done using Bokeh in the ```bokeh_app``` folder. The folder contents to subfolders and `main.py` file which pass the ```data``` from the data folder to respective tabs by calling different script from the ```scripts``` and present on the dashboard for visualization. Click on the YouTube video below to watch a quick demonestration:  
 [![Dashboard using Bokeh](https://img.youtube.com/vi/8QJlC4n9W-Y/0.jpg)](https://www.youtube.com/watch?v=8QJlC4n9W-Y)
+
+## parameters
+Below are the list of parameters chosen to ranking the website.
 
 - **Load Time:** The time between the initial request and the browser load event
 - **First Byte:** The time it takes for the server to respond with the first byte of the response (in other words, the time it takes for the back-end to load)
@@ -44,11 +47,6 @@ Now, you can lauch you localhost by running
 ```
 python manage.py runserver
 ```
-
-
-<!--
-Description of how the completed project corresponds to the proposal, and
-A user guide describing how to use your system. -->
 
 <!-- to table creating  -->
 <!-- python manage.py migrate --run-syncdb -->
