@@ -6,7 +6,7 @@ The visualization is done using Bokeh in the ```bokeh_app``` folder. The folder 
 [![Dashboard using Bokeh](https://img.youtube.com/vi/8QJlC4n9W-Y/0.jpg)](https://www.youtube.com/watch?v=8QJlC4n9W-Y)
 
 ## parameters
-Below are the list of parameters chosen to ranking the website.
+Below are the list of parameters chosen to rank the website.
 
 - **Load Time:** The time between the initial request and the browser load event
 - **First Byte:** The time it takes for the server to respond with the first byte of the response (in other words, the time it takes for the back-end to load)
