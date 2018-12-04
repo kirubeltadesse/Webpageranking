@@ -3,10 +3,12 @@ This repository include visualization and analysis for ranking website. The visu
 
 ## Visualization
 The visualization is done using Bokeh in the ```bokeh_app``` folder. The folder contents to subfolders and `main.py` file which pass the ```data``` from the data folder to respective tabs by calling different script from the ```scripts``` and present on the dashboard for visualization. Click on the YouTube video below to watch a quick demonestration:  
-[![Dashboard using Bokeh](https://img.youtube.com/vi/8QJlC4n9W-Y/0.jpg)](https://www.youtube.com/watch?v=8QJlC4n9W-Y)
+[![Dashboard using Bokeh](https://img.youtube.com/vi/8QJlC4n9W-Y/0.jpg)](https://www.youtube.com/watch?v=yxDvyyUQoUI&t=100s)
+
+<!-- https://www.youtube.com/watch?v=8QJlC4n9W-Y -->
 
 ## parameters
-Below are the list of parameters chosen to ranking the website.
+Below are the list of parameters chosen to rank the website.
 
 - **Load Time:** The time between the initial request and the browser load event
 - **First Byte:** The time it takes for the server to respond with the first byte of the response (in other words, the time it takes for the back-end to load)
@@ -46,6 +48,17 @@ python manage.py migrate --run-syncdb
 Now, you can lauch you localhost by running
 ```
 python manage.py runserver
+```
+
+### Results 
+- The test was performed several time both on the same list of servers. And the difference in those paramater in different time is the same. In other words, the difference is negligible.
+
+OLS stands for Ordinary Least Squares and the method “Least Squares” means that we’re trying to fit a regression line that would minimize the square of distance from the regression line
+
+Using this model for the **First Byte:** being Y, p1 =**Speed Index**, p2 = **Load time**, p3 = **Start render**, p4 = **DOM elements**
+the coefficent for each parameters will be as follows:
+```
+Y = -0.7179*p1 + 0.5839*p2 +0.7944*p3 +-1.3634*p4
 ```
 
 <!-- to table creating  -->
