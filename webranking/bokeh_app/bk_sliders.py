@@ -120,7 +120,7 @@ def histogram_tab(doc):
 		# Blank plot with correct labels
 		p = figure(plot_width = 700, plot_height = 700,
 				  title = "Histogram of Parameters for the Websites",
-				  x_axis_label = 'parameters', y_axis_label = "values")
+				  x_axis_label = 'Performance Metrics Bin Distribution', y_axis_label = "Number of Websites")
 
 		# Quad glyphs to create a histogram
 		p.quad(source=src, bottom =0,left = 'left', right = 'right', color ='color', top= 'proportion',fill_alpha = 0.7, hover_fill_color = 'navy', legend = 'name',
@@ -261,7 +261,7 @@ def barrank_tab(doc):
 
 		p = figure(x_range=list_of_params, plot_height=450, toolbar_location="right",
 				title="Comparison of the Performance of Websites",
-				x_axis_label = 'parameters', y_axis_label = 'Percentage')
+				x_axis_label = 'Performance Metric name', y_axis_label = 'Performance Metrics Value')
 
 		p.vbar(x=dodge('params',-0.15,range=p.x_range),
 						top = 'Standard', width=0.65, source=src, color = "#41b6c4", muted_color="#41b6c4",
@@ -358,7 +358,7 @@ def density_tab(doc):
 	def make_plot(src):
 		p = figure(plot_width = 700, plot_height = 700,
 					title = 'Density Plot Parameters',
-					x_axis_label = 'Distribution', y_axis_label = 'Density')
+					x_axis_label = 'Performance Metric Probability Distribution', y_axis_label = 'Number of Websites')
 		p.multi_line('x', 'y', color = 'color', legend = 'label',
 					line_width = 3, source = src)
 		hover = HoverTool(tooltips=[('parameter','@label'),
