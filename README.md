@@ -37,6 +37,11 @@ Now, you can lauch you localhost by running
 python manage.py runserver
 ```
 
+
+<!--
+Description of how the completed project corresponds to the proposal, and
+A user guide describing how to use your system. -->
+
 <!-- to table creating  -->
 <!-- python manage.py migrate --run-syncdb -->
 
