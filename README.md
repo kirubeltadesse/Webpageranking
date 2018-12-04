@@ -18,7 +18,7 @@ Below are the list of parameters chosen to ranking the website.
 
 ## Required packages
 
-The packages required to run the django server and every application on this project are specified in the `windows-specfile.txt` or `linux-specfile.txt`. If you have conda installed in you machine either windows or linux, after cloning the repo you can run conda with the respective specfile. like this for windows:
+The packages required to run the Django server and every application on this project are specified in the `windows-specfile.txt` or `linux-specfile.txt`. If you have conda installed in you machine either windows or linux, after cloning the repo you can run conda with the respective specfile. like this for windows:
 
 ```
 $ conda create --name <env> --file windows-specfile.txt
