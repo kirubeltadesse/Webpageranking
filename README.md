@@ -3,7 +3,7 @@ This repository include visualization and analysis for ranking website. The visu
 
 ## Visualization
 The visualization is done using Bokeh in the ```bokeh_app``` folder. The folder contents to subfolders and `main.py` file which pass the ```data``` from the data folder to respective tabs by calling different script from the ```scripts``` and present on the dashboard for visualization. Click on the YouTube video below to watch a quick demonestration:  
-[![Dashboard using Bokeh](https://img.youtube.com/vi/8QJlC4n9W-Y/0.jpg)](https://www.youtube.com/watch?v=yxDvyyUQoUI&t=100s)
+[![Dashboard using Bokeh](https://img.youtube.com/vi/eGM2O1w6aUk/0.jpg)](https://youtu.be/eGM2O1w6aUk)
 
 <!-- https://www.youtube.com/watch?v=8QJlC4n9W-Y -->
 
